@@ -1,0 +1,157 @@
+import React,{ useEffect, useState, useContext } from 'react'
+import { Container, Form, Dropdown, Button, Row, Col, Spinner } from 'react-bootstrap'
+import { ResultContext } from './Home'
+import { Redirect } from 'react-router-dom'
+import axios from 'axios'
+
+export default function CustomSearch() {
+
+	const { setCustomResults } = useContext(ResultContext)
+	const [loading, setLoading] = useState(true)
+	const [redirect, setRedirect] = useState(false)
+	const [error, setError] = useState('')
+	const [name, setName] = useState('')
+	const [year, setYear] = useState(undefined)
+	const [type, setType] = useState(undefined)
+	const [season, setSeason] = useState(undefined)
+	const [episode, setEpisode] = useState(undefined)
+	const [pplot, setPplot] = useState(undefined)
+	const [plot, setPlot] = useState(undefined)
+	const [pname, setPname] = useState('')
+	const [pyear, setPyear] = useState(undefined)
+	const [pepisode, setPepisode] = useState(undefined)
+	const [ptype, setPtype] = useState(undefined)
+	const [pseason, setPseason] = useState(undefined)
+
+	function handleSubmit(e){
+		e.preventDefault()
+		setLoading(true)
+		setName(pname)
+		setYear(pyear)
+		setType(ptype)
+		setSeason(pseason)
+		setEpisode(pepisode)
+		setPlot(pplot)
+	}
+	function handleSelect(e){
+		setPtype(e)
+	}
+	function handleSelect2(e){
+		setPplot(e)
+	}
+
+	useEffect(()=> {
+		axios.get(`http://www.omdbapi.com/`, {
+		params:{
+			s: name,
+			type: type,
+			y: year,
+			Season: season,
+			Episode: episode,
+			plot: plot,
+			apikey: "85835f53"
+		}
+	})
+		.then(response => {
+			console.log(response.data)
+			setCustomResults(response.data)
+			setLoading(false)
+			if(response.data.Response !== 'False'){
+				setRedirect(true)
+			}
+		})
+		.catch(err => {
+			setError(err);
+			console.log(err)
+		});
+}, [year, name, type, episode, season, plot, setCustomResults])
+
+	if(loading){
+		return (
+			<div style={{display: "grid", placeItems: "center"}}>
+				<Spinner animation="grow" />
+			</div>
+		)
+	}
+	if(error){
+		return <div>error...</div>
+	}
+	return(
+		<Container className="pt-5"> 
+			{redirect && <Redirect to='/customResult'/>}
+			<Form onSubmit={handleSubmit}>
+				<Container style={{width: "50%"}}>
+					<Row>
+						<Col>
+							<Form.Group>
+								<Form.Control 
+									type="text"
+									placeholder="Search by Name"
+									value={pname}
+									onChange={(e) => setPname(e.target.value)}
+									required
+								/>
+							</Form.Group>
+						</Col>
+						<Col>
+							<Form.Group>
+								<Form.Control 
+									type="number"
+									min="1900"
+									max="2021"
+									placeholder="Enter release year"
+									value={pyear}
+									onChange={(e) => setPyear(e.target.value)}
+								/>
+							</Form.Group>
+						</Col>
+					</Row>
+					<Row>
+						<Col>
+							<Form.Group>
+							<Form.Control 
+								type="number"
+								placeholder="Enter Season"
+								value={pseason}
+								onChange={(e) => setPseason(e.target.value)}
+							/>
+						</Form.Group>
+						</Col>
+						<Col>
+							<Form.Group>
+								<Form.Control 
+									type="number"
+									placeholder="Enter episode"
+									value={pepisode}
+									onChange={(e) => setPepisode(e.target.value)}
+								/>
+							</Form.Group>
+						</Col>
+					</Row>
+					<div className="d-flex justify-content-between">
+						<Dropdown>
+							<Dropdown.Toggle variant="secondary" id="dropdown-basic">
+								{ptype || "Select Type"}
+							</Dropdown.Toggle>
+							<Dropdown.Menu>
+								<Dropdown.Item eventKey="Movie" onSelect={handleSelect}>Movie</Dropdown.Item>
+								<Dropdown.Item eventKey="Series" onSelect={handleSelect}>Series</Dropdown.Item>
+								<Dropdown.Item eventKey="Episode" onSelect={handleSelect}>Episode</Dropdown.Item>
+							</Dropdown.Menu>
+						</Dropdown>
+						<Dropdown>
+							<Dropdown.Toggle variant="secondary" id="dropdown-basic">
+								{pplot || "Select Plot Type"}
+							</Dropdown.Toggle>
+							<Dropdown.Menu>
+								<Dropdown.Item eventKey="Short" onSelect={handleSelect2}>Short</Dropdown.Item>
+								<Dropdown.Item eventKey="Full" onSelect={handleSelect2}>Full</Dropdown.Item>
+							</Dropdown.Menu>
+						</Dropdown>
+					</div>
+				</Container>
+				<div className="d-flex justify-content-center" ><Button type="submit" variant="secondary">Search</Button></div>
+			</Form>
+		</Container>
+	)
+}
