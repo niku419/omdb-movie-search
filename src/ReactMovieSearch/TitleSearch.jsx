@@ -40,7 +40,7 @@ export default function TitleSearch() {
 		setPplot(e)
 	}
 	useEffect(()=> {
-		axios.get(`http://www.omdbapi.com/`, {
+		axios.get(`https://www.omdbapi.com/`, {
 		params:{
 			t: name,
 			type: type,
