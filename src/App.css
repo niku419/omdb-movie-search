@@ -1,3 +1,41 @@
-.App {
+ /* .App {
   text-align: center;
+} */
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
 }
+
+body {
+  font-family: system-ui;
+  margin: 0;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.flex.fill {
+  height: 100%;
+}
+
+.flex.center {
+  justify-content: center;
+}
+
+/* h1.heading-text {
+  font-family: "Arial Black", sans-serif;
+  letter-spacing: -1px;
+  background-color: black;
+  color: white;
+  text-align: center;
+ } */

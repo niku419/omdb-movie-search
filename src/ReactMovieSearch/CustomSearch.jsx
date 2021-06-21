@@ -1,5 +1,5 @@
 import React,{ useEffect, useState, useContext } from 'react'
-import { Container, Form, Dropdown, Button, Row, Col, Spinner } from 'react-bootstrap'
+import { Container, Form, Dropdown, Button, Spinner, Badge } from 'react-bootstrap'
 import { ResultContext } from './Home'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
@@ -79,78 +79,69 @@ export default function CustomSearch() {
 	return(
 		<Container className="pt-5"> 
 			{redirect && <Redirect to='/customResult'/>}
+			<h1 className="pb-5 text-center">
+				<Badge variant="dark">Custom Search</Badge>
+			</h1>
 			<Form onSubmit={handleSubmit}>
 				<Container style={{width: "50%"}}>
-					<Row>
-						<Col>
-							<Form.Group>
-								<Form.Control 
-									type="text"
-									placeholder="Search by Name"
-									value={pname}
-									onChange={(e) => setPname(e.target.value)}
-									required
-								/>
-							</Form.Group>
-						</Col>
-						<Col>
-							<Form.Group>
-								<Form.Control 
-									type="number"
-									min="1900"
-									max="2021"
-									placeholder="Enter release year"
-									value={pyear}
-									onChange={(e) => setPyear(e.target.value)}
-								/>
-							</Form.Group>
-						</Col>
-					</Row>
-					<Row>
-						<Col>
-							<Form.Group>
-							<Form.Control 
-								type="number"
-								placeholder="Enter Season"
-								value={pseason}
-								onChange={(e) => setPseason(e.target.value)}
-							/>
-						</Form.Group>
-						</Col>
-						<Col>
-							<Form.Group>
-								<Form.Control 
-									type="number"
-									placeholder="Enter episode"
-									value={pepisode}
-									onChange={(e) => setPepisode(e.target.value)}
-								/>
-							</Form.Group>
-						</Col>
-					</Row>
-					<div className="d-flex justify-content-between">
-						<Dropdown>
-							<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-								{ptype || "Select Type"}
-							</Dropdown.Toggle>
-							<Dropdown.Menu>
-								<Dropdown.Item eventKey="Movie" onSelect={handleSelect}>Movie</Dropdown.Item>
-								<Dropdown.Item eventKey="Series" onSelect={handleSelect}>Series</Dropdown.Item>
-								<Dropdown.Item eventKey="Episode" onSelect={handleSelect}>Episode</Dropdown.Item>
-							</Dropdown.Menu>
-						</Dropdown>
-						<Dropdown>
-							<Dropdown.Toggle variant="secondary" id="dropdown-basic">
-								{pplot || "Select Plot Type"}
-							</Dropdown.Toggle>
-							<Dropdown.Menu>
-								<Dropdown.Item eventKey="Short" onSelect={handleSelect2}>Short</Dropdown.Item>
-								<Dropdown.Item eventKey="Full" onSelect={handleSelect2}>Full</Dropdown.Item>
-							</Dropdown.Menu>
-						</Dropdown>
-					</div>
+					<Form.Group>
+						<Form.Control 
+							type="text"
+							placeholder="Search by Name"
+							value={pname}
+							onChange={(e) => setPname(e.target.value)}
+							required
+						/>
+					</Form.Group>
+					<Form.Group>
+						<Form.Control 
+							type="number"
+							min="1900"
+							max="2021"
+							placeholder="Enter release year"
+							value={pyear}
+							onChange={(e) => setPyear(e.target.value)}
+						/>
+					</Form.Group>
+					<Form.Group>
+					<Form.Control 
+						type="number"
+						placeholder="Enter Season"
+						value={pseason}
+						onChange={(e) => setPseason(e.target.value)}
+					/>
+				</Form.Group>
+					<Form.Group>
+						<Form.Control 
+							type="number"
+							placeholder="Enter episode"
+							value={pepisode}
+							onChange={(e) => setPepisode(e.target.value)}
+						/>
+					</Form.Group>
+					<Dropdown className="pt-2">
+						<Dropdown.Toggle variant="dark" id="dropdown-basic">
+							{ptype || "Select Type"}
+						</Dropdown.Toggle>
+						<Dropdown.Menu>
+							<Dropdown.Item eventKey="Movie" onSelect={handleSelect}>Movie</Dropdown.Item>
+							<Dropdown.Item eventKey="Series" onSelect={handleSelect}>Series</Dropdown.Item>
+							<Dropdown.Item eventKey="Episode" onSelect={handleSelect}>Episode</Dropdown.Item>
+						</Dropdown.Menu>
+					</Dropdown>
+					<Dropdown className="py-2">
+						<Dropdown.Toggle variant="dark" id="dropdown-basic">
+							{pplot || "Select Plot Type"}
+						</Dropdown.Toggle>
+						<Dropdown.Menu>
+							<Dropdown.Item eventKey="Short" onSelect={handleSelect2}>Short</Dropdown.Item>
+							<Dropdown.Item eventKey="Full" onSelect={handleSelect2}>Full</Dropdown.Item>
+						</Dropdown.Menu>
+					</Dropdown>
 				</Container>
-				<div className="d-flex justify-content-center" ><Button type="submit" variant="secondary">Search</Button></div>
+				<div className="d-flex justify-content-center" >
+					<Button type="submit" variant="dark">Search</Button>
+				</div>
 			</Form>
 		</Container>
 	)
