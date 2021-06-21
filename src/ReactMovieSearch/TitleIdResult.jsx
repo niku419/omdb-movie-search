@@ -11,7 +11,7 @@ export default function TitleResult() {
   const [error, setError] = useState("")
   
   useEffect(()=> {
-		axios.get(`http://www.omdbapi.com/`, {
+		axios.get(`https://www.omdbapi.com/`, {
       params:{
         i: id,
         apikey: "85835f53"

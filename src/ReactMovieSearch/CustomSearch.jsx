@@ -41,7 +41,7 @@ export default function CustomSearch() {
 	}
 
 	useEffect(()=> {
-		axios.get(`http://www.omdbapi.com/`, {
+		axios.get(`https://www.omdbapi.com/`, {
 		params:{
 			s: name,
 			type: type,
