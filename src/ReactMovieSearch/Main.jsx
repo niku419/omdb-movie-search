@@ -18,6 +18,9 @@ export default function Main() {
             backgroundColor: '#66fcf1'
           }}>
           <CustomSearch/>
+          <h4 className="pt-5 text-center col d-flex flex-row-reverse">
+            <Badge variant="dark">Scroll down to search by title</Badge>
+          </h4>
         </ParallaxLayer>
         <ParallaxLayer offset={1} speed={2} style={{ backgroundColor: '#fc4445' }} />
         <ParallaxLayer
