@@ -89,6 +89,7 @@ export default function TitleSearch() {
 							placeholder="Search by Title or Id"
 							value={pname}
 							onChange={(e) => setPname(e.target.value)}
+							required
 						/>
 					</Form.Group>
 					<Form.Group>
