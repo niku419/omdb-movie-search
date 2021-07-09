@@ -52,11 +52,11 @@ export default function Main() {
             <Nav.Link href="https://instagram.com/_niku_419"><FontAwesomeIcon  icon={faInstagram} /></Nav.Link>
             <Nav.Link href="#"><FontAwesomeIcon icon={faFacebookF} /></Nav.Link>
           </Nav>
-          <Form inline>
-            {/* <Nav className="mr-auto"> 
+          {/* <Form inline>
+            <Nav className="mr-auto"> 
               <Nav.Link>made for Hiku<FontAwesomeIcon color="#8d0101" icon={faHeart} /></Nav.Link>
-            </Nav> */}
-          </Form>
+            </Nav> 
+          </Form>*/}
         </Navbar>
       </Container>
     </>
