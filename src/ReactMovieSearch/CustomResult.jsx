@@ -12,7 +12,7 @@ export default function CustomResult() {
         <Container className="col-xs-12 col-sm-6 col-md-4 col-lg-3" key={index}>
           <Card style={{margin: "5% 0%"}}>
             <div className="view overlay">
-              <Card.Img className="card-img-top" src={customResult.Poster} alt="Card image cap" />
+              <Card.Img className="card-img-top img" src={customResult.Poster} alt="Card image cap" />
             </div>
             <Card.Body style={{textAlign: "center",backgroundColor: "black"}}>
               <Card.Title>
