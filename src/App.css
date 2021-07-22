@@ -31,7 +31,12 @@ body {
 .flex.center {
   justify-content: center;
 }
-
+.img{
+  height: 250px !important;
+  width: 300px !important;
+  overflow: hidden !important;
+  object-fit: cover !important;
+}
 /* h1.heading-text {
   font-family: "Arial Black", sans-serif;
   letter-spacing: -1px;
